@@ -47,23 +47,47 @@ html, body {
 
 .main-header { text-align: center; margin-bottom: 60px; }
 
-/* The Liquid Blend Interaction */
-.liquid-text {
-    font-size: 4.5rem; font-weight: 900; margin: 0 0 10px 0; letter-spacing: 4px;
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+/* THE LIQUID BLEND INTERACTION (SVG Gooey Style) */
+.gooey-container {
+    position: relative;
+    display: inline-block;
+    padding: 10px 30px; /* Buffer room for the liquid stretch */
+    filter: url('#goo'); /* Applies the SVG magic */
     cursor: default;
 }
-.liquid-text:hover {
-    filter: blur(3px) contrast(120%);
-    letter-spacing: 8px;
-    text-shadow: 0 0 30px rgba(255, 26, 26, 0.8), 0 0 60px rgba(255, 255, 255, 0.4);
-    transform: scale(1.02);
+
+.liquid-text {
+    font-size: 4.5rem; font-weight: 900; margin: 0; letter-spacing: 4px;
+    position: relative; z-index: 2;
+    transition: transform 0.4s ease, letter-spacing 0.4s ease;
 }
 
-.text-red { color: var(--ecw-red); transition: color 0.5s; }
+/* The invisible element that acts as the "magnet" for the liquid tails */
+.cursor-blob {
+    position: absolute;
+    width: 45px; height: 45px;
+    background: var(--ecw-red); /* Creates red bleeding tails */
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0; z-index: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Triggers the blending on hover */
+.gooey-container:hover .cursor-blob {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+.gooey-container:hover .liquid-text {
+    transform: scale(1.02);
+    letter-spacing: 1px; /* Slightly pulls letters together to help them melt */
+}
+
+.text-red { color: var(--ecw-red); }
 .text-white { color: white; }
 .main-header h2 {
-    font-size: 1.1rem; color: #ccc; margin: 0; font-weight: 600; letter-spacing: 6px;
+    font-size: 1.1rem; color: #ccc; margin: 15px 0 0 0; font-weight: 600; letter-spacing: 6px;
 }
 
 /* =========================================================
@@ -81,7 +105,6 @@ html, body {
     box-shadow: 0 0 15px rgba(255, 26, 26, 0.4);
 }
 
-/* Modal Styling omitted for brevity, keeping existing */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
 .modal-overlay.active { display: flex; opacity: 1; }
 .modal-box { background: #0f0f0f; border: 1px solid #333; padding: 40px; border-radius: 12px; width: 320px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
@@ -130,8 +153,8 @@ html, body {
 }
 .card-subtitle {
     color: var(--text-grey); 
-    /* REDUCED BY 25% (From 1.35rem to 1.05rem) */
-    font-size: 1.05rem; 
+    /* Reduced by 25% from 1.05rem down to ~0.85rem */
+    font-size: 0.85rem; 
     font-weight: bold; margin: 0; letter-spacing: 3px; font-style: italic;
 }
 
@@ -142,13 +165,17 @@ html, body {
 }
 
 /* =========================================================
-   FULLSCREEN BOTTOM TOGGLE
+   FULLSCREEN BOTTOM TOGGLE (Perfect Centering)
    ========================================================= */
 .fullscreen-dock {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    position: fixed; 
+    bottom: 30px; left: 0; width: 100%;
+    display: flex; justify-content: center; /* Flawless mathematical center */
     z-index: 100;
+    pointer-events: none; /* Let clicks pass through empty space */
 }
 .fs-btn {
+    pointer-events: auto; /* Enable clicking on the button itself */
     background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2);
     color: white; width: 45px; height: 45px; border-radius: 50%;
     font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
@@ -165,5 +192,4 @@ html, body {
     .view-card { width: 95%; }
     .main-header h1 { font-size: 3rem; }
     .main-header h2 { font-size: 0.8rem; letter-spacing: 4px; }
-    .card-subtitle { font-size: 0.85rem; }
 }
