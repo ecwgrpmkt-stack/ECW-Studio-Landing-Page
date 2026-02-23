@@ -9,7 +9,6 @@
 
 html, body {
     margin: 0; padding: 0; height: 100%;
-    /* INCREASED DARKNESS: Almost pure black with a tiny hint of light at the center */
     background: radial-gradient(circle at center, #080808 0%, #000000 100%);
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: white; overflow-x: hidden;
@@ -24,8 +23,7 @@ html, body {
         radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
         radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
     filter: blur(40px);
-    z-index: 1; 
-    pointer-events: none;
+    z-index: 1; pointer-events: none;
     animation: smoke-drift 15s infinite alternate ease-in-out;
 }
 @keyframes smoke-drift {
@@ -35,8 +33,7 @@ html, body {
 
 .particles-bg {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 2; 
-    pointer-events: none; opacity: 0.9;
+    z-index: 2; pointer-events: none; opacity: 0.9;
 }
 
 /* =========================================================
@@ -49,10 +46,22 @@ html, body {
 }
 
 .main-header { text-align: center; margin-bottom: 60px; }
-.main-header h1 {
+
+/* The Liquid Blend Interaction */
+.liquid-text {
     font-size: 4.5rem; font-weight: 900; margin: 0 0 10px 0; letter-spacing: 4px;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: default;
 }
-.text-red { color: var(--ecw-red); }
+.liquid-text:hover {
+    filter: blur(3px) contrast(120%);
+    letter-spacing: 8px;
+    text-shadow: 0 0 30px rgba(255, 26, 26, 0.8), 0 0 60px rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+}
+
+.text-red { color: var(--ecw-red); transition: color 0.5s; }
+.text-white { color: white; }
 .main-header h2 {
     font-size: 1.1rem; color: #ccc; margin: 0; font-weight: 600; letter-spacing: 6px;
 }
@@ -72,44 +81,21 @@ html, body {
     box-shadow: 0 0 15px rgba(255, 26, 26, 0.4);
 }
 
-.modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
-    display: none; justify-content: center; align-items: center; z-index: 1000;
-    opacity: 0; transition: opacity 0.3s ease;
-}
+/* Modal Styling omitted for brevity, keeping existing */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
 .modal-overlay.active { display: flex; opacity: 1; }
-.modal-box {
-    background: #0f0f0f; border: 1px solid #333; padding: 40px;
-    border-radius: 12px; width: 320px; text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-}
+.modal-box { background: #0f0f0f; border: 1px solid #333; padding: 40px; border-radius: 12px; width: 320px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
 .modal-title { margin-top: 0; margin-bottom: 25px; font-size: 1.2rem; letter-spacing: 2px; color: white; }
-.input-group input {
-    width: 100%; padding: 12px 15px; margin-bottom: 15px;
-    background: rgba(255,255,255,0.05); border: 1px solid #444; color: white;
-    border-radius: 6px; box-sizing: border-box; outline: none; transition: border 0.3s;
-}
+.input-group input { width: 100%; padding: 12px 15px; margin-bottom: 15px; background: rgba(255,255,255,0.05); border: 1px solid #444; color: white; border-radius: 6px; box-sizing: border-box; outline: none; transition: border 0.3s; }
 .input-group input:focus { border-color: var(--ecw-red); }
-.error-msg {
-    color: var(--ecw-red); font-size: 0.85rem; margin-bottom: 15px;
-    display: none; font-weight: bold; animation: shake 0.4s;
-}
+.error-msg { color: var(--ecw-red); font-size: 0.85rem; margin-bottom: 15px; display: none; font-weight: bold; animation: shake 0.4s; }
 .modal-actions { display: flex; gap: 10px; }
-.btn {
-    flex: 1; padding: 12px; border: none; border-radius: 6px;
-    font-weight: bold; cursor: pointer; letter-spacing: 1px; transition: all 0.3s;
-}
+.btn { flex: 1; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; letter-spacing: 1px; transition: all 0.3s; }
 .btn-cancel { background: transparent; color: #888; border: 1px solid #444; }
 .btn-cancel:hover { background: #222; color: white; }
 .btn-login { background: var(--ecw-red); color: white; }
 .btn-login:hover { background: #cc0000; }
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
 /* =========================================================
    LIVE VIDEO CARDS & LABELS
@@ -125,7 +111,7 @@ html, body {
 .view-card:hover { transform: translateY(-8px); }
 
 .video-container {
-    width: 100%; aspect-ratio: 16 / 9; background: #050505; /* Deepened */
+    width: 100%; aspect-ratio: 16 / 9; background: #050505;
     border-radius: 8px; overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 40px rgba(0,0,0,0.8); transition: border-color 0.3s;
@@ -144,7 +130,8 @@ html, body {
 }
 .card-subtitle {
     color: var(--text-grey); 
-    font-size: 1.35rem; 
+    /* REDUCED BY 25% (From 1.35rem to 1.05rem) */
+    font-size: 1.05rem; 
     font-weight: bold; margin: 0; letter-spacing: 3px; font-style: italic;
 }
 
@@ -154,10 +141,29 @@ html, body {
     50% { opacity: 1; text-shadow: 0 0 8px rgba(255,255,255,0.2); }
 }
 
+/* =========================================================
+   FULLSCREEN BOTTOM TOGGLE
+   ========================================================= */
+.fullscreen-dock {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    z-index: 100;
+}
+.fs-btn {
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2);
+    color: white; width: 45px; height: 45px; border-radius: 50%;
+    font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(5px); transition: all 0.3s ease;
+}
+.fs-btn:hover {
+    background: rgba(255, 26, 26, 0.2); border-color: var(--ecw-red);
+    box-shadow: 0 0 15px rgba(255, 26, 26, 0.5); color: var(--ecw-red);
+    transform: scale(1.1);
+}
+
 @media (max-width: 900px) {
     .cards-grid { flex-direction: column; align-items: center; gap: 50px; }
     .view-card { width: 95%; }
     .main-header h1 { font-size: 3rem; }
     .main-header h2 { font-size: 0.8rem; letter-spacing: 4px; }
-    .card-subtitle { font-size: 1.1rem; }
+    .card-subtitle { font-size: 0.85rem; }
 }
