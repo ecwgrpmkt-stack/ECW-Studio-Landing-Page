@@ -1,7 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     // ======================================================
-    // 1. LIVE BACKGROUND PARTICLE ENGINE (WITH PARALLAX)
+    // 1. LIQUID TYPOGRAPHY HOVER ENGINE
+    // Tracks the mouse over the header to pull the liquid blob
+    // ======================================================
+    const headerGoo = document.getElementById('headerGoo');
+    const cursorBlob = document.getElementById('cursorBlob');
+    
+    if (headerGoo && cursorBlob) {
+        headerGoo.addEventListener('mousemove', (e) => {
+            // Get boundaries of the gooey container
+            const rect = headerGoo.getBoundingClientRect();
+            // Calculate mouse position strictly relative to the container
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Move the blob magnet to the cursor
+            cursorBlob.style.left = `${x}px`;
+            cursorBlob.style.top = `${y}px`;
+        });
+    }
+
+    // ======================================================
+    // 2. LIVE BACKGROUND PARTICLE ENGINE (DARK ASH & PARALLAX)
     // ======================================================
     const canvas = document.getElementById('bgCanvas');
     if (canvas) {
@@ -32,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.size = Math.random() * 2 + 0.5; 
                 this.speedX = Math.random() * 0.4 - 0.2; 
                 this.speedY = Math.random() * 0.4 - 0.2; 
-                this.opacity = Math.random() * 0.5 + 0.2;
+                this.opacity = Math.random() * 0.5 + 0.1;
                 this.parallaxFactor = this.size * 0.015; 
             }
             update() {
@@ -46,7 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
             draw(currentMouseX, currentMouseY) {
                 const dx = (currentMouseX - canvas.width / 2) * this.parallaxFactor;
                 const dy = (currentMouseY - canvas.height / 2) * this.parallaxFactor;
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                
+                // UPDATED: Dark Ash Color instead of bright white
+                ctx.fillStyle = `rgba(50, 50, 50, ${this.opacity})`;
+                
                 ctx.beginPath();
                 ctx.arc(this.x - dx, this.y - dy, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -71,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ======================================================
-    // 2. CINEMATIC VIDEO FADE TRANSITIONS
+    // 3. CINEMATIC VIDEO FADE TRANSITIONS
     // ======================================================
     const videos = document.querySelectorAll('.smooth-loop');
     videos.forEach(vid => {
@@ -92,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ======================================================
-    // 3. FULLSCREEN TOGGLE LOGIC
+    // 4. FULLSCREEN TOGGLE LOGIC
     // ======================================================
     const fsToggleBtn = document.getElementById('fsToggleBtn');
     if(fsToggleBtn) {
@@ -110,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ======================================================
-    // 4. ADMIN SECURITY MODAL LOGIC
+    // 5. ADMIN SECURITY MODAL LOGIC
     // ======================================================
     const adminTriggerBtn = document.getElementById('adminTriggerBtn');
     const adminModal = document.getElementById('adminModal');
