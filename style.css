@@ -47,44 +47,21 @@ html, body {
 
 .main-header { text-align: center; margin-bottom: 60px; }
 
-/* THE LIQUID BLEND INTERACTION (SVG Gooey Style) */
-.gooey-container {
-    position: relative;
+/* THE CLEAN EXPANSION INTERACTION */
+.expand-text {
     display: inline-block;
-    padding: 10px 30px; /* Buffer room for the liquid stretch */
-    filter: url('#goo'); /* Applies the SVG magic */
-    cursor: default;
-}
-
-.liquid-text {
     font-size: 4.5rem; font-weight: 900; margin: 0; letter-spacing: 4px;
-    position: relative; z-index: 2;
-    transition: transform 0.4s ease, letter-spacing 0.4s ease;
+    cursor: pointer;
+    /* Smooth, elegant easing for the stretch */
+    transition: letter-spacing 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* The invisible element that acts as the "magnet" for the liquid tails */
-.cursor-blob {
-    position: absolute;
-    width: 45px; height: 45px;
-    background: var(--ecw-red); /* Creates red bleeding tails */
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 0; z-index: 1;
-    transform: translate(-50%, -50%) scale(0.5);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+.expand-text:hover, .expand-text:active {
+    letter-spacing: 14px; /* Stretches the letters apart */
+    transform: scale(1.03); /* Slight bump forward */
 }
 
-/* Triggers the blending on hover */
-.gooey-container:hover .cursor-blob {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-.gooey-container:hover .liquid-text {
-    transform: scale(1.02);
-    letter-spacing: 1px; /* Slightly pulls letters together to help them melt */
-}
-
-.text-red { color: var(--ecw-red); }
+.text-red { color: var(--ecw-red); transition: color 0.5s; }
 .text-white { color: white; }
 .main-header h2 {
     font-size: 1.1rem; color: #ccc; margin: 15px 0 0 0; font-weight: 600; letter-spacing: 6px;
@@ -153,7 +130,6 @@ html, body {
 }
 .card-subtitle {
     color: var(--text-grey); 
-    /* Reduced by 25% from 1.05rem down to ~0.85rem */
     font-size: 0.85rem; 
     font-weight: bold; margin: 0; letter-spacing: 3px; font-style: italic;
 }
@@ -165,17 +141,16 @@ html, body {
 }
 
 /* =========================================================
-   FULLSCREEN BOTTOM TOGGLE (Perfect Centering)
+   FULLSCREEN BOTTOM TOGGLE
    ========================================================= */
 .fullscreen-dock {
     position: fixed; 
     bottom: 30px; left: 0; width: 100%;
-    display: flex; justify-content: center; /* Flawless mathematical center */
-    z-index: 100;
-    pointer-events: none; /* Let clicks pass through empty space */
+    display: flex; justify-content: center;
+    z-index: 100; pointer-events: none; 
 }
 .fs-btn {
-    pointer-events: auto; /* Enable clicking on the button itself */
+    pointer-events: auto; 
     background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2);
     color: white; width: 45px; height: 45px; border-radius: 50%;
     font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
