@@ -1,13 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     // ======================================================
-    // 1. LIVE BACKGROUND PARTICLE ENGINE
-    // (Moved to top so it runs instantly before videos load)
+    // 1. LIVE BACKGROUND PARTICLE ENGINE (WITH PARALLAX)
     // ======================================================
     const canvas = document.getElementById('bgCanvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
+        
+        // Mouse Tracking Variables for Parallax
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let targetMouseX = mouseX;
+        let targetMouseY = mouseY;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -17,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
+        // Listen for mouse movements globally
+        window.addEventListener('mousemove', (e) => {
+            targetMouseX = e.clientX;
+            targetMouseY = e.clientY;
+        });
+
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -24,35 +35,55 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.size = Math.random() * 2 + 0.5; 
                 this.speedX = Math.random() * 0.4 - 0.2; 
                 this.speedY = Math.random() * 0.4 - 0.2; 
-                this.opacity = Math.random() * 0.5 + 0.2; // Brighter particles
+                this.opacity = Math.random() * 0.5 + 0.2;
+                
+                // Parallax Factor: Bigger particles = closer = more reactive to the mouse
+                this.parallaxFactor = this.size * 0.015; 
             }
+            
             update() {
+                // Natural drift
                 this.x += this.speedX;
                 this.y -= this.speedY;
 
-                if(this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                // Wrap around edges cleanly
+                if(this.x < -50 || this.x > canvas.width + 50 || this.y < -50 || this.y > canvas.height + 50) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
                 }
             }
-            draw() {
+            
+            draw(currentMouseX, currentMouseY) {
+                // Calculate Parallax Offset
+                const dx = (currentMouseX - canvas.width / 2) * this.parallaxFactor;
+                const dy = (currentMouseY - canvas.height / 2) * this.parallaxFactor;
+
                 ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                // Apply the offset (subtracting makes them move opposite to the mouse, simulating depth)
+                ctx.arc(this.x - dx, this.y - dy, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
         function initParticles() {
             particles = [];
-            for(let i = 0; i < 80; i++) {
+            for(let i = 0; i < 90; i++) {
                 particles.push(new Particle());
             }
         }
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
+            
+            // Smoothly ease the mouse coordinates to prevent jarring jumps
+            mouseX += (targetMouseX - mouseX) * 0.05;
+            mouseY += (targetMouseY - mouseY) * 0.05;
+
+            particles.forEach(p => { 
+                p.update(); 
+                p.draw(mouseX, mouseY); 
+            });
             requestAnimationFrame(animateParticles);
         }
 
@@ -66,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const videos = document.querySelectorAll('.smooth-loop');
     
     videos.forEach(vid => {
-        // Force play to ensure browser doesn't block it
         vid.play().catch(e => console.warn("Autoplay waiting for interaction"));
 
         vid.addEventListener('timeupdate', () => {
