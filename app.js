@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const u = userInput.value.trim(); const p = passInput.value.trim();
             if (u === 'ecw' && p === 'ecw123') {
                 errorMsg.style.display = 'none'; loginBtn.innerText = "AUTHENTICATING...";
-                setTimeout(() => { window.location.href = "https://ecwgrpmkt-stack.github.io/ECW-Studio-Interior/admin.html"; }, 500);
+                setTimeout(() => { window.location.href = "admin.html"; }, 500);
             } else {
                 errorMsg.style.display = 'block'; errorMsg.style.animation = 'none';
                 errorMsg.offsetHeight; errorMsg.style.animation = null; 
@@ -151,3 +151,4 @@ document.addEventListener("DOMContentLoaded", () => {
         passInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') attemptLogin(); });
     }
 });
+
