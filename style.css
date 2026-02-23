@@ -1,0 +1,189 @@
+/* =========================================================
+   GLOBAL RESET & VARIABLES
+   ========================================================= */
+:root {
+    --neon-red: #ff2a2a;
+    --neon-red-glow: rgba(255, 42, 42, 0.6);
+    --dark-bg: #050505;
+    --card-bg: #111111;
+}
+
+html, body {
+    margin: 0; padding: 0; height: 100%;
+    background-color: var(--dark-bg);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: white; overflow-x: hidden;
+}
+
+/* Background Atmosphere */
+.bg-atmosphere {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #1a0505 0%, #000000 100%);
+    z-index: -1; pointer-events: none;
+}
+
+/* =========================================================
+   ADMIN PORTAL BUTTON & MODAL
+   ========================================================= */
+.admin-portal-btn {
+    position: absolute; top: 30px; right: 40px; z-index: 100;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #aaa; padding: 10px 20px; border-radius: 30px;
+    cursor: pointer; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px;
+    transition: all 0.3s ease; backdrop-filter: blur(5px);
+}
+.admin-portal-btn:hover {
+    color: white; border-color: var(--neon-red);
+    box-shadow: 0 0 15px var(--neon-red-glow); background: rgba(255, 42, 42, 0.1);
+}
+
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+    display: none; justify-content: center; align-items: center; z-index: 1000;
+    opacity: 0; transition: opacity 0.3s ease;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+
+.modal-box {
+    background: #0f0f0f; border: 1px solid #333; padding: 40px;
+    border-radius: 12px; width: 320px; text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: translateY(20px); transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal-box { transform: translateY(0); }
+
+.modal-title { margin-top: 0; margin-bottom: 25px; font-size: 1.2rem; letter-spacing: 2px; color: white; }
+.input-group input {
+    width: 100%; padding: 12px 15px; margin-bottom: 15px;
+    background: rgba(255,255,255,0.05); border: 1px solid #444; color: white;
+    border-radius: 6px; box-sizing: border-box; outline: none; transition: border 0.3s;
+}
+.input-group input:focus { border-color: var(--neon-red); }
+.error-msg {
+    color: var(--neon-red); font-size: 0.85rem; margin-bottom: 15px;
+    display: none; font-weight: bold; animation: shake 0.4s;
+}
+.modal-actions { display: flex; gap: 10px; }
+.btn {
+    flex: 1; padding: 12px; border: none; border-radius: 6px;
+    font-weight: bold; cursor: pointer; letter-spacing: 1px; transition: all 0.3s;
+}
+.btn-cancel { background: transparent; color: #888; border: 1px solid #444; }
+.btn-cancel:hover { background: #222; color: white; }
+.btn-login { background: var(--neon-red); color: white; }
+.btn-login:hover { background: #e60000; box-shadow: 0 0 15px var(--neon-red-glow); }
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* =========================================================
+   TYPOGRAPHY (Neon Stroke & Pulse CTA)
+   ========================================================= */
+.gateway-container {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px; box-sizing: border-box;
+}
+
+.header-wrapper { margin-bottom: 10px; position: relative; }
+
+/* The Animated Neon Stroke Text */
+.neon-stroke-text {
+    font-size: 5rem; font-weight: 900; letter-spacing: 5px; margin: 0;
+    color: transparent; /* Makes the inside of the text invisible */
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
+    position: relative;
+    animation: neon-flicker 4s infinite alternate;
+}
+/* Gives it that glowing bleed effect */
+.neon-stroke-text::before {
+    content: attr(data-text); position: absolute; left: 0; top: 0;
+    color: transparent; -webkit-text-stroke: 2px var(--neon-red);
+    filter: blur(8px); opacity: 0.8; z-index: -1;
+}
+
+@keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 10px rgba(255,255,255,0.2), 0 0 20px rgba(255,42,42,0.4), 0 0 40px rgba(255,42,42,0.2);
+    }
+    20%, 24%, 55% {
+        text-shadow: none; opacity: 0.5; /* The "flicker" off state */
+    }
+}
+
+/* Blinking Attention Grabber CTA */
+.pulse-cta {
+    font-size: 1rem; letter-spacing: 4px; font-weight: bold;
+    color: #aaa; margin-bottom: 50px; text-transform: uppercase;
+    animation: slow-blink 2s ease-in-out infinite;
+}
+@keyframes slow-blink {
+    0%, 100% { opacity: 0.3; transform: scale(0.98); color: #888; }
+    50% { opacity: 1; transform: scale(1); color: white; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+}
+
+/* =========================================================
+   LIVE THUMBNAIL CARDS (Video Containers)
+   ========================================================= */
+.cards-grid {
+    display: flex; gap: 40px; justify-content: center; width: 100%; max-width: 1200px;
+}
+
+.portal-card {
+    position: relative; width: 45%; max-width: 500px; height: 350px;
+    border-radius: 16px; overflow: hidden; text-decoration: none;
+    background: #111; border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Video Background styling to simulate live 3D/360 */
+.live-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 1; opacity: 0.6; transition: opacity 0.4s;
+    background: #1a1a1a; /* Fallback color if no video is present */
+}
+
+/* The dark gradient that sits over the video to make text readable */
+.card-content {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+    z-index: 2; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 30px; box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%);
+    transition: all 0.4s;
+}
+
+.card-content h2 {
+    color: white; margin: 0 0 10px 0; font-size: 1.5rem; letter-spacing: 2px;
+}
+
+.explore-btn {
+    color: var(--neon-red); font-size: 0.85rem; font-weight: bold;
+    letter-spacing: 2px; display: flex; align-items: center; gap: 10px;
+    opacity: 0; transform: translateY(15px); transition: all 0.4s ease;
+}
+
+/* Card Hover Interactions */
+.card-glow {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    box-shadow: inset 0 0 0 2px transparent; border-radius: 16px;
+    z-index: 3; transition: all 0.4s; pointer-events: none;
+}
+
+.portal-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(255, 42, 42, 0.2);
+    border-color: transparent;
+}
+.portal-card:hover .live-bg { opacity: 0.9; }
+.portal-card:hover .card-glow { box-shadow: inset 0 0 0 2px var(--neon-red); }
+.portal-card:hover .explore-btn { opacity: 1; transform: translateY(0); }
+.portal-card:hover .explore-btn span { transform: translateX(5px); transition: transform 0.3s; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .cards-grid { flex-direction: column; align-items: center; gap: 30px; }
+    .portal-card { width: 90%; height: 250px; }
+    .neon-stroke-text { font-size: 3.5rem; }
+}

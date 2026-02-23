@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECW Studio - Master Gateway</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <button id="adminTriggerBtn" class="admin-portal-btn">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:-3px; margin-right:5px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        ADMIN PORTAL
+    </button>
+
+    <div id="adminModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 class="modal-title">Admin Authentication</h2>
+            <div class="input-group">
+                <input type="text" id="adminUser" placeholder="Username" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <input type="password" id="adminPass" placeholder="Password">
+            </div>
+            <div id="errorMsg" class="error-msg">Invalid Credentials</div>
+            <div class="modal-actions">
+                <button id="cancelBtn" class="btn btn-cancel">CANCEL</button>
+                <button id="loginBtn" class="btn btn-login">ENTER SYSTEM</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="gateway-container">
+        
+        <div class="header-wrapper">
+            <h1 class="neon-stroke-text" data-text="ECW STUDIO">ECW STUDIO</h1>
+        </div>
+
+        <p class="pulse-cta">SELECT WHAT YOU LIKE TO EXPLORE</p>
+
+        <div class="cards-grid">
+            
+            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Exterior/models.html" class="portal-card exterior-card">
+                <div class="card-glow"></div>
+                <video class="live-bg" autoplay loop muted playsinline>
+                    <source src="exterior-loop.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <h2>EXTERIOR CUSTOMIZATION</h2>
+                    <span class="explore-btn">ENTER 3D VIEWER <span>→</span></span>
+                </div>
+            </a>
+
+            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Interior/gallery.html" class="portal-card interior-card">
+                <div class="card-glow"></div>
+                <video class="live-bg" autoplay loop muted playsinline>
+                    <source src="interior-loop.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <h2>INTERIOR EXPERIENCE</h2>
+                    <span class="explore-btn">ENTER 360 GALLERY <span>→</span></span>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <div class="bg-atmosphere"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
