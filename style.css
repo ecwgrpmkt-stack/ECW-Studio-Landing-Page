@@ -168,3 +168,84 @@ html, body {
     .main-header h1 { font-size: 3rem; }
     .main-header h2 { font-size: 0.8rem; letter-spacing: 4px; }
 }
+
+/* =========================================================
+   ADMIN DASHBOARD SPECIFIC STYLES
+   ========================================================= */
+.admin-body {
+    background: radial-gradient(circle at top, #111 0%, #000 100%);
+    overflow-y: auto;
+}
+
+.admin-nav {
+    position: relative; z-index: 20;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px; background: rgba(0,0,0,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+}
+.nav-brand {
+    font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; display: flex; align-items: center; gap: 10px;
+}
+.nav-brand .badge {
+    background: var(--ecw-red); color: white; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; letter-spacing: 1px;
+}
+.logout-btn {
+    color: #888; text-decoration: none; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;
+    border: 1px solid #333; padding: 8px 16px; border-radius: 20px; transition: all 0.3s;
+}
+.logout-btn:hover { color: white; border-color: var(--ecw-red); background: rgba(255, 26, 26, 0.1); }
+
+.admin-container {
+    position: relative; z-index: 20;
+    max-width: 1200px; margin: 0 auto; padding: 60px 20px;
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.admin-header {
+    text-align: center; max-width: 800px; margin-bottom: 60px;
+}
+.admin-header h1 {
+    font-size: 3rem; margin: 0 0 15px 0; letter-spacing: 3px;
+}
+.admin-header p {
+    color: #aaa; font-size: 1.1rem; line-height: 1.6;
+}
+
+.repo-grid {
+    display: flex; gap: 30px; justify-content: center; width: 100%; flex-wrap: wrap;
+}
+
+.repo-card {
+    background: #080808; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; width: 30%; min-width: 300px; padding: 40px 30px;
+    text-decoration: none; color: white; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex; flex-direction: column; align-items: flex-start;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.repo-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 26, 26, 0.5);
+    box-shadow: 0 15px 40px rgba(255, 26, 26, 0.15);
+}
+
+.repo-icon {
+    font-size: 3rem; margin-bottom: 20px; filter: grayscale(100%); transition: filter 0.3s;
+}
+.repo-card:hover .repo-icon { filter: grayscale(0%); }
+
+.repo-card h3 {
+    margin: 0 0 15px 0; font-size: 1.4rem; letter-spacing: 1px; color: var(--ecw-red);
+}
+.repo-card p {
+    color: #888; font-size: 0.95rem; line-height: 1.5; margin: 0 0 30px 0; flex-grow: 1;
+}
+.repo-link {
+    font-size: 0.85rem; font-weight: bold; letter-spacing: 2px; color: #555; transition: color 0.3s;
+}
+.repo-card:hover .repo-link { color: white; }
+
+@media (max-width: 900px) {
+    .repo-card { width: 100%; }
+    .admin-header h1 { font-size: 2rem; }
+}
