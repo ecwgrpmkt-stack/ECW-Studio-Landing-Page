@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECW Studio - Master Gateway</title>
+    <title>ECW Studio - Virtual Gallery</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <button id="adminTriggerBtn" class="admin-portal-btn">
-        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:-3px; margin-right:5px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-        ADMIN PORTAL
-    </button>
+    <div class="smoke-bg"></div>
+
+    <button id="adminTriggerBtn" class="admin-portal-btn">ADMIN PORTAL</button>
 
     <div id="adminModal" class="modal-overlay">
         <div class="modal-box">
@@ -32,40 +31,44 @@
 
     <main class="gateway-container">
         
-        <div class="header-wrapper">
-            <h1 class="neon-stroke-text" data-text="ECW STUDIO">ECW STUDIO</h1>
-        </div>
-
-        <p class="pulse-cta">SELECT WHAT YOU LIKE TO EXPLORE</p>
+        <header class="main-header">
+            <h1>ECW <span class="text-red">STUDIO</span></h1>
+            <h2>EDIRISINGHA VIRTUAL GALLERY</h2>
+        </header>
 
         <div class="cards-grid">
             
-            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Exterior/models.html" class="portal-card exterior-card">
-                <div class="card-glow"></div>
-                <video class="live-bg" autoplay loop muted playsinline>
-                    <source src="Loop/exterior-loop.mp4" type="video/mp4">
-                </video>
-                <div class="card-content">
-                    <h2>EXTERIOR CUSTOMIZATION</h2>
-                    <span class="explore-btn">ENTER 3D VIEWER <span>→</span></span>
+            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Exterior/models.html" class="view-card">
+                <div class="video-container">
+                    <video autoplay loop muted playsinline>
+                        <source src="Loop/exterior-loop.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-labels">
+                    <h3 class="card-title">EXTERIOR EXPERIENCE</h3>
+                    <p class="card-subtitle blink-anim">ENTER FOR 3D VIEWER</p>
                 </div>
             </a>
 
-            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Interior/gallery.html" class="portal-card interior-card">
-                <div class="card-glow"></div>
-                <video class="live-bg" autoplay loop muted playsinline>
-                    <source src="Loop/interior-loop.mp4" type="video/mp4">
-                </video>
-                <div class="card-content">
-                    <h2>INTERIOR EXPERIENCE</h2>
-                    <span class="explore-btn">ENTER 360 GALLERY <span>→</span></span>
+            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Interior/gallery.html" class="view-card">
+                <div class="video-container">
+                    <video autoplay loop muted playsinline>
+                        <source src="Loop/interior-loop.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-labels">
+                    <h3 class="card-title">INTERIOR EXPERIENCE</h3>
+                    <p class="card-subtitle blink-anim">ENTER FOR 360 GALLERY</p>
                 </div>
             </a>
 
         </div>
-    </main>
 
-    <div class="bg-atmosphere"></div>
+        <div class="bottom-cta-pill">
+            SELECT WHAT YOU LIKE TO EXPLORE
+        </div>
+
+    </main>
 
     <script src="app.js"></script>
 </body>
