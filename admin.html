@@ -19,31 +19,49 @@
     <main class="admin-container">
         <header class="admin-header">
             <h1>SYSTEM <span class="text-red">CONTROL PANEL</span></h1>
-            <p>To ensure deployment stability and version control, all backend modifications—including code edits, 3D model uploads, and 360° image updates—are securely managed via GitHub. Select a repository below to manage its assets.</p>
+            <p>To ensure deployment stability and version control, all backend modifications—including code edits, 3D model uploads, and 360° image updates—are securely managed via GitHub.</p>
         </header>
 
         <div class="repo-grid">
             
-            <a href="https://github.com/ecwgrpmkt-stack/ECW-Studio-Landing-Page" target="_blank" class="repo-card">
+            <div class="repo-card">
                 <div class="repo-icon">🖥️</div>
                 <h3>Master Landing Page</h3>
                 <p>Manage the main gateway, routing logic, login credentials, and global styles.</p>
-                <span class="repo-link">ACCESS REPOSITORY →</span>
-            </a>
+                
+                <div class="url-box">
+                    <label>Repository Link:</label>
+                    <input type="text" readonly value="https://github.com/ecwgrpmkt-stack/ECW-Studio-Landing-Page" onclick="this.select();">
+                </div>
+                
+                <a href="https://github.com/ecwgrpmkt-stack/ECW-Studio-Landing-Page" target="_blank" class="repo-link-btn">ACCESS REPOSITORY →</a>
+            </div>
 
-            <a href="https://github.com/ecwgrpmkt-stack/ECW-Studio-Exterior" target="_blank" class="repo-card">
+            <div class="repo-card">
                 <div class="repo-icon">🚘</div>
                 <h3>Exterior 3D Engine</h3>
                 <p>Upload new .glb/.gltf 3D vehicle models, update the color engine, and edit 3D viewer UI.</p>
-                <span class="repo-link">ACCESS REPOSITORY →</span>
-            </a>
+                
+                <div class="url-box">
+                    <label>Repository Link:</label>
+                    <input type="text" readonly value="https://github.com/ecwgrpmkt-stack/ECW-Studio-Exterior" onclick="this.select();">
+                </div>
+                
+                <a href="https://github.com/ecwgrpmkt-stack/ECW-Studio-Exterior" target="_blank" class="repo-link-btn">ACCESS REPOSITORY →</a>
+            </div>
 
-            <a href="https://github.com/ecwgrpmkt-stack/ECW-Studio-Interior" target="_blank" class="repo-card">
+            <div class="repo-card">
                 <div class="repo-icon">📸</div>
                 <h3>Interior 360 Gallery</h3>
-                <p>Upload new high-res panoramic interior images, update drawing tools, and manage the gallery UI.</p>
-                <span class="repo-link">ACCESS REPOSITORY →</span>
-            </a>
+                <p>Upload new high-res panoramic interior images, update drawing tools, and manage gallery UI.</p>
+                
+                <div class="url-box">
+                    <label>Repository Link:</label>
+                    <input type="text" readonly value="https://github.com/ecwgrpmkt-stack/ECW-Studio-Interior" onclick="this.select();">
+                </div>
+                
+                <a href="https://github.com/ecwgrpmkt-stack/ECW-Studio-Interior" target="_blank" class="repo-link-btn">ACCESS REPOSITORY →</a>
+            </div>
 
         </div>
     </main>
