@@ -17,12 +17,8 @@
     <div id="adminModal" class="modal-overlay">
         <div class="modal-box">
             <h2 class="modal-title">Admin Authentication</h2>
-            <div class="input-group">
-                <input type="text" id="adminUser" placeholder="Username" autocomplete="off">
-            </div>
-            <div class="input-group">
-                <input type="password" id="adminPass" placeholder="Password">
-            </div>
+            <div class="input-group"><input type="text" id="adminUser" placeholder="Username" autocomplete="off"></div>
+            <div class="input-group"><input type="password" id="adminPass" placeholder="Password"></div>
             <div id="errorMsg" class="error-msg">Invalid Credentials</div>
             <div class="modal-actions">
                 <button id="cancelBtn" class="btn btn-cancel">CANCEL</button>
@@ -31,7 +27,7 @@
         </div>
     </div>
 
-    <main class="gateway-container">
+    <main class="gateway-container" id="mainGateway">
         
         <header class="main-header">
             <h1 class="expand-text">ECW <span class="text-red">STUDIO</span></h1>
@@ -39,8 +35,7 @@
         </header>
 
         <div class="cards-grid">
-            
-            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Exterior/models.html" class="view-card">
+            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Exterior/models.html" class="view-card shell-link">
                 <div class="video-container">
                     <video class="smooth-loop" autoplay muted playsinline preload="auto">
                         <source src="loop/exterior-loop.mp4" type="video/mp4">
@@ -53,7 +48,7 @@
                 </div>
             </a>
 
-            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Interior/gallery.html" class="view-card">
+            <a href="https://ecwgrpmkt-stack.github.io/ECW-Studio-Interior/gallery.html" class="view-card shell-link">
                 <div class="video-container">
                     <video class="smooth-loop" autoplay muted playsinline preload="auto">
                         <source src="loop/interior-loop.mp4" type="video/mp4">
@@ -65,13 +60,15 @@
                     <p class="card-subtitle blink-anim">ENTER FOR 360 GALLERY</p>
                 </div>
             </a>
-
         </div>
-
     </main>
 
-    <div class="fullscreen-dock">
+    <div class="fullscreen-dock" id="fsDock">
         <button id="fsToggleBtn" class="fs-btn" title="Toggle Fullscreen">⛶</button>
+    </div>
+
+    <div id="iframeContainer" class="iframe-container">
+        <iframe id="appFrame" src="" allowfullscreen allow="xr-spatial-tracking; autoplay"></iframe>
     </div>
 
     <script src="app.js"></script>
