@@ -297,23 +297,6 @@ html, body {
 .fullscreen-dock.hidden { opacity: 0; pointer-events: none; }
 
 /* =========================================================
-   QUICK MOBILE PATCH - LANDING & ADMIN PAGE
-   ========================================================= */
-@media (max-width: 900px) {
-    /* Shrink the massive header */
-    .expand-text { font-size: 3rem !important; }
-    .main-header h2 { font-size: 0.8rem !important; }
-
-    /* Stack the video cards vertically */
-    .cards-grid { flex-direction: column !important; align-items: center !important; gap: 30px !important; }
-    .view-card { width: 95% !important; }
-
-    /* Stack the Admin panels vertically */
-    .repo-grid { flex-direction: column !important; align-items: center !important; }
-    .repo-card { width: 100% !important; max-width: none !important; }
-    .admin-nav { flex-direction: column !important; gap: 15px !important; text-align: center !important; }
-}
-/* =========================================================
    MOBILE RESPONSIVE PATCH - MASTER LANDING PAGE
    ========================================================= */
 @media (max-width: 900px) {
@@ -347,4 +330,3 @@ html, body {
     .cards-grid { flex-direction: row !important; gap: 20px !important; }
     .view-card { width: 45% !important; }
 }
-
