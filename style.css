@@ -313,3 +313,38 @@ html, body {
     .repo-card { width: 100% !important; max-width: none !important; }
     .admin-nav { flex-direction: column !important; gap: 15px !important; text-align: center !important; }
 }
+/* =========================================================
+   MOBILE RESPONSIVE PATCH - MASTER LANDING PAGE
+   ========================================================= */
+@media (max-width: 900px) {
+    /* 1. Unlock scrolling for landscape mode and small screens */
+    html, body { overflow-y: auto !important; overflow-x: hidden !important; height: auto !important; }
+    
+    .gateway-container { 
+        min-height: 100vh !important; height: auto !important; 
+        padding-top: 80px !important; padding-bottom: 60px !important; 
+        justify-content: flex-start !important; 
+    }
+
+    /* 2. Fix the Admin Button from overlapping the header */
+    .admin-portal-btn { 
+        top: 15px !important; right: 50% !important; 
+        transform: translateX(50%) !important; 
+        width: max-content !important; padding: 8px 20px !important; 
+        font-size: 0.75rem !important; z-index: 200 !important;
+    }
+
+    /* 3. Stack cards vertically in Portrait */
+    .cards-grid { flex-direction: column !important; gap: 40px !important; margin-bottom: 50px !important; }
+    .view-card { width: 95% !important; margin: 0 auto !important; }
+}
+
+/* Specific fix for Phones turned Sideways (Landscape) */
+@media (max-height: 600px) and (orientation: landscape) {
+    .gateway-container { padding-top: 70px !important; }
+    .main-header { margin-bottom: 20px !important; }
+    .main-header h1 { font-size: 2.5rem !important; }
+    .cards-grid { flex-direction: row !important; gap: 20px !important; }
+    .view-card { width: 45% !important; }
+}
+
