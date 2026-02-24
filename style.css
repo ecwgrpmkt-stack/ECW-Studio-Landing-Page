@@ -297,10 +297,10 @@ html, body {
 .fullscreen-dock.hidden { opacity: 0; pointer-events: none; }
 
 /* =========================================================
-   MOBILE RESPONSIVE PATCH - MASTER LANDING PAGE (V2)
+   MOBILE RESPONSIVE PATCH - MASTER LANDING PAGE (V4)
    ========================================================= */
 @media (max-width: 900px) {
-    /* Unlock scrolling for landscape mode and small screens */
+    /* Unlock scrolling for small screens */
     html, body { overflow-y: auto !important; overflow-x: hidden !important; height: auto !important; }
     
     .gateway-container { 
@@ -310,10 +310,10 @@ html, body {
     }
 
     /* Reduce text elements by ~25% */
-    .expand-text { font-size: 2.25rem !important; } /* Was 3rem */
-    .main-header h2 { font-size: 0.65rem !important; letter-spacing: 3px !important; } /* Was 0.8rem */
-    .card-title { font-size: 1.2rem !important; } /* Was 1.6rem */
-    .card-subtitle { font-size: 0.65rem !important; } /* Was 0.85rem */
+    .expand-text { font-size: 2.25rem !important; }
+    .main-header h2 { font-size: 0.65rem !important; letter-spacing: 3px !important; } 
+    .card-title { font-size: 1.2rem !important; } 
+    .card-subtitle { font-size: 0.65rem !important; } 
 
     /* Fix the Admin Button from overlapping the header */
     .admin-portal-btn { 
@@ -328,11 +328,31 @@ html, body {
     .view-card { width: 95% !important; margin: 0 auto !important; }
 }
 
-/* Specific fix for Phones turned Sideways (Landscape) */
+/* =========================================================
+   Aggressive Landscape Compression (Sideways Phones) 
+   Removes the massive scrollable gaps!
+   ========================================================= */
 @media (max-height: 600px) and (orientation: landscape) {
-    .gateway-container { padding-top: 60px !important; }
-    .main-header { margin-bottom: 15px !important; }
-    .main-header h1 { font-size: 1.8rem !important; }
-    .cards-grid { flex-direction: row !important; gap: 15px !important; }
-    .view-card { width: 45% !important; }
+    .gateway-container { 
+        padding-top: 20px !important; /* Removed huge top gap */
+        padding-bottom: 10px !important; 
+        min-height: auto !important;
+    }
+    
+    /* Shrink the header area */
+    .main-header { margin-bottom: 10px !important; }
+    .main-header h1 { font-size: 1.6rem !important; }
+    .main-header h2 { font-size: 0.55rem !important; margin-top: 5px !important; }
+    
+    /* Pull cards up and shrink them to fit screen */
+    .cards-grid { flex-direction: row !important; gap: 20px !important; margin-bottom: 10px !important; }
+    .view-card { width: 42% !important; }
+    .card-labels { margin-top: 10px !important; }
+    .card-title { font-size: 1rem !important; margin-bottom: 4px !important; }
+    .card-subtitle { font-size: 0.55rem !important; }
+
+    /* Shrink floating buttons */
+    .admin-portal-btn { top: 10px !important; padding: 4px 12px !important; font-size: 0.6rem !important; }
+    .fullscreen-dock { bottom: 10px !important; }
+    .fs-btn { width: 35px !important; height: 35px !important; font-size: 1rem !important; }
 }
