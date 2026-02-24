@@ -152,3 +152,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// ======================================================
+    // PERSISTENT SHELL & IFRAME ROUTING LOGIC
+    // ======================================================
+    const shellLinks = document.querySelectorAll('.shell-link');
+    const iframeContainer = document.getElementById('iframeContainer');
+    const appFrame = document.getElementById('appFrame');
+    const mainGateway = document.getElementById('mainGateway');
+    const fsDock = document.getElementById('fsDock');
+
+    // Intercept clicks on the cards to load inside the Iframe instead of redirecting
+    shellLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetUrl = link.getAttribute('href');
+            
+            // Load URL into iframe
+            appFrame.src = targetUrl;
+            
+            // Fade out Main Menu, Fade in Iframe
+            mainGateway.classList.add('hidden');
+            if(fsDock) fsDock.classList.add('hidden');
+            iframeContainer.classList.add('active');
+        });
+    });
+
+    // Listen for cross-origin messages from the Exterior/Interior Repos
+    window.addEventListener('message', (e) => {
+        // Handle "BACK" button clicked inside the iframe
+        if (e.data === 'close-iframe') {
+            iframeContainer.classList.remove('active');
+            mainGateway.classList.remove('hidden');
+            if(fsDock) fsDock.classList.remove('hidden');
+            
+            // Clear iframe memory after fade transition completes
+            setTimeout(() => { appFrame.src = ""; }, 600); 
+        }
+        
+        // Handle "Fullscreen" button clicked inside the iframe
+        if (e.data === 'toggle-fullscreen') {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => console.log(err));
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+    });
+
+
