@@ -150,9 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
         loginBtn.addEventListener('click', attemptLogin);
         passInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') attemptLogin(); });
     }
-});
 
-// ======================================================
+    // ======================================================
     // PERSISTENT SHELL & IFRAME ROUTING LOGIC
     // ======================================================
     const shellLinks = document.querySelectorAll('.shell-link');
@@ -198,5 +197,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
+});
 
